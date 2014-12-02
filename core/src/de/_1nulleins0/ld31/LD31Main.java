@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Game extends ApplicationAdapter {
+public class LD31Main extends ApplicationAdapter {
 
     public static Dimension resolution = new Dimension(800, 600);
     private SpriteBatch batch;
