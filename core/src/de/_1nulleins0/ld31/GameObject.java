@@ -47,4 +47,6 @@ public abstract class GameObject {
     public void select(boolean s){
 	selected = s;
     }
+    
+    public abstract void dispose();
 }
