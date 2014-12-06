@@ -12,14 +12,17 @@ public class GameScreen implements Screen {
     private LD31Main game;
     private OrthographicCamera camera;
     private Vector3 touchPos;
-    private Player player;
+    // private Player player;
+
+    public Dot testcircle;
 
     public GameScreen(LD31Main g) {
 	game = g;
 	camera = new OrthographicCamera();
 	camera.setToOrtho(false, game.resolutionWidth, game.resolutionHeight);
 	touchPos = new Vector3();
-	player = new Player(game.batch);
+	// player = new Player(game.batch);
+	testcircle = new Dot(game.batch, game.shapeRender, 0, 0, ObjectID.Dot, 50);
     }
 
     private void renderGame() {
@@ -31,7 +34,9 @@ public class GameScreen implements Screen {
 	game.batch.setProjectionMatrix(camera.combined);
 	game.batch.begin();
 
-	player.renderPlayer();
+	testcircle.render();
+
+	// player.renderPlayer();
 
 	game.font.draw(
 		game.batch,
@@ -42,33 +47,29 @@ public class GameScreen implements Screen {
     }
 
     private void updateGame() {
-	/*
-	 * if (Gdx.input.isTouched()) { touchPos.set(Gdx.input.getX(),
-	 * Gdx.input.getY(), 0); camera.unproject(touchPos); //
-	 * player.setPos(new Point((int) touchPos.x, (int) touchPos.y)); }
-	 */
-	
-	
-	/*
-	if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-	    System.out.println("key - right - pressed");
-	    player.updatePlayer(
-		    (int) (player.getXPos() + 500 * Gdx.graphics.getDeltaTime()),
-		    (int) player.getYPos(),
-		    0
-		    );
-	    System.out.println(player.getXPos() + " ---- " + Gdx.graphics.getDeltaTime());
-	} else if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-	    System.out.println("key - left - pressed");
-	    player.updatePlayer(
-		    (int) (player.getXPos() - 500 * Gdx.graphics.getDeltaTime()),
-		    (int) player.getYPos(),
-		    1
-		    );
-	    System.out.println(player.getXPos() + " ---- " + Gdx.graphics.getDeltaTime());
+
+	if (Gdx.input.isTouched()) {
+	    touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+	    camera.unproject(touchPos);
+	    
+	    
+	    
+	    
+	    // player.setPos(new Point((int) touchPos.x, (int) touchPos.y));
 	}
-	*/
-	
+
+	/*
+	 * if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+	 * System.out.println("key - right - pressed"); player.updatePlayer(
+	 * (int) (player.getXPos() + 500 * Gdx.graphics.getDeltaTime()), (int)
+	 * player.getYPos(), 0 ); System.out.println(player.getXPos() + " ---- "
+	 * + Gdx.graphics.getDeltaTime()); } else if
+	 * (Gdx.input.isKeyPressed(Keys.LEFT)) {
+	 * System.out.println("key - left - pressed"); player.updatePlayer(
+	 * (int) (player.getXPos() - 500 * Gdx.graphics.getDeltaTime()), (int)
+	 * player.getYPos(), 1 ); System.out.println(player.getXPos() + " ---- "
+	 * + Gdx.graphics.getDeltaTime()); }
+	 */
     }
 
     @Override
@@ -99,6 +100,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-	player.dispose();
+	// player.dispose();
     }
 }
