@@ -50,8 +50,8 @@ public class Handler {
     public void removePowerUp(GameObject object) {
 	this.powerups.remove(object);
     }
-    
-    public void dispose(){
+
+    public void dispose() {
 	for (int i = 0; i < powerups.size(); i++) {
 	    tempObject = powerups.get(i);
 	    tempObject.dispose();

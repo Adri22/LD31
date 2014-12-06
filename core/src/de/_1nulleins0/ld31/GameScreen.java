@@ -11,7 +11,6 @@ public class GameScreen implements Screen {
     private LD31Main game;
     private OrthographicCamera camera;
     private Vector3 touchPos;
-    // private Player player;
     private Handler handler;
     private CircleGenerator cg;
     private float timer;
@@ -24,9 +23,6 @@ public class GameScreen implements Screen {
 	handler = new Handler();
 	cg = new CircleGenerator(handler, game.batch, game.shapeRender);
 	timer = 0;
-	// player = new Player(game.batch);
-	// testcircle = new Dot(game.batch, game.shapeRender, 0, 0,
-	// ObjectID.Dot, 50);
     }
 
     private void renderGame() {
@@ -41,7 +37,7 @@ public class GameScreen implements Screen {
 	game.batch.begin();
 
 	handler.renderPowerUps();
-	
+
 	// game.font.setColor(0, 0, 0, 0);
 	game.font.draw(
 		game.batch,
@@ -50,17 +46,17 @@ public class GameScreen implements Screen {
 		game.resolutionHeight - 5);
 	game.font.draw(
 		game.batch,
-		"Time: " + (int)(timer / 60) + "min " + (int)(timer % 60) + "sec",
+		"Time: " + (int) (timer / 60) + "min " + (int) (timer % 60) + "sec",
 		200,
 		game.resolutionHeight - 5);
-	
+
 	game.batch.end();
     }
 
     private void updateGame() {
 
 	timer += Gdx.graphics.getDeltaTime();
-	
+
 	if (Gdx.input.isTouched()) {
 	    touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 	    camera.unproject(touchPos);
@@ -70,7 +66,7 @@ public class GameScreen implements Screen {
 
 	cg.decreaseSpawnTime(timer);
 	cg.generateCircles(Gdx.graphics.getDeltaTime());
-	
+
 	// update stuff here
 	handler.updateCircles();
 	handler.updatePowerUps();

@@ -10,7 +10,7 @@ public abstract class GameObject {
     protected SpriteBatch batch;
     protected ShapeRenderer shapeRender;
     protected boolean selected;
-    
+
     public GameObject(SpriteBatch b, ShapeRenderer sr, float x, float y, ObjectID id) {
 	this.x = x;
 	this.y = y;
@@ -43,10 +43,10 @@ public abstract class GameObject {
     public ObjectID getID() {
 	return id;
     };
-    
-    public void select(boolean s){
+
+    public void select(boolean s) {
 	selected = s;
     }
-    
+
     public abstract void dispose();
 }
