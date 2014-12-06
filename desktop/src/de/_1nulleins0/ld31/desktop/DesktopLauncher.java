@@ -9,8 +9,8 @@ public class DesktopLauncher {
 	LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
 	config.title = "LD31";
-	config.width = LD31Main.resolution.width;
-	config.height = LD31Main.resolution.height;
+	config.width = LD31Main.resolutionWidth;
+	config.height = LD31Main.resolutionHeight;
 	config.resizable = false;
 
 	new LwjglApplication(new LD31Main(), config);

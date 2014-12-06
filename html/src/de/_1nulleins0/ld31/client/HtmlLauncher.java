@@ -7,13 +7,16 @@ import de._1nulleins0.ld31.LD31Main;
 
 public class HtmlLauncher extends GwtApplication {
 
-        @Override
-        public GwtApplicationConfiguration getConfig () {
-                return new GwtApplicationConfiguration(480, 320);
-        }
+    int width = LD31Main.resolutionWidth;
+    int height = LD31Main.resolutionHeight;
 
-        @Override
-        public ApplicationListener getApplicationListener () {
-                return new LD31Main();
-        }
+    @Override
+    public GwtApplicationConfiguration getConfig() {
+	return new GwtApplicationConfiguration(width, height);
+    }
+
+    @Override
+    public ApplicationListener getApplicationListener() {
+	return new LD31Main();
+    }
 }
