@@ -4,25 +4,29 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector3;
 
 public class GameScreen implements Screen {
 
     private LD31Main game;
     private OrthographicCamera camera;
-    private Vector3 touchPos;
     private Handler handler;
+    private InputHandler input;
     private CircleGenerator cg;
     private float timer;
+    private static int life;
+    private static boolean gameover;
 
     public GameScreen(LD31Main g) {
 	game = g;
 	camera = new OrthographicCamera();
 	camera.setToOrtho(false, game.resolutionWidth, game.resolutionHeight);
-	touchPos = new Vector3();
 	handler = new Handler();
+	input = new InputHandler(camera, handler);
+	Gdx.input.setInputProcessor(input);
 	cg = new CircleGenerator(handler, game.batch, game.shapeRender);
 	timer = 0;
+	life = 1000;
+	gameover = false;
     }
 
     private void renderGame() {
@@ -38,37 +42,67 @@ public class GameScreen implements Screen {
 
 	handler.renderPowerUps();
 
-	// game.font.setColor(0, 0, 0, 0);
 	game.font.draw(
 		game.batch,
 		"FPS:" + (1 / Gdx.graphics.getDeltaTime()),
 		5,
 		game.resolutionHeight - 5);
-	game.font.draw(
-		game.batch,
-		"Time: " + (int) (timer / 60) + "min " + (int) (timer % 60) + "sec",
-		200,
-		game.resolutionHeight - 5);
+
+	if (!gameover) {
+	    game.font.draw(
+		    game.batch,
+		    "Time: " + (int) (timer / 60) + "min " + (int) (timer % 60) + "sec",
+		    200,
+		    game.resolutionHeight - 5);
+	    game.font.draw(
+		    game.batch,
+		    "Life: " + life,
+		    400,
+		    game.resolutionHeight - 5);
+	} else {
+	    game.font.draw(
+		    game.batch,
+		    "Your time: " + (int) (timer / 60) + "min " + (int) (timer % 60) + "sec",
+		    430,
+		    game.resolutionHeight - 300);
+	    game.font.draw(
+		    game.batch,
+		    "Click anywhere to start a new turn!",
+		    390,
+		    game.resolutionHeight - 350);
+	}
 
 	game.batch.end();
     }
 
     private void updateGame() {
-
-	timer += Gdx.graphics.getDeltaTime();
-
-	if (Gdx.input.isTouched()) {
-	    touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-	    camera.unproject(touchPos);
-	    handler.detectCircles(touchPos.x, touchPos.y);
+	if (!gameover) {
+	    timer += Gdx.graphics.getDeltaTime();
+	} else {
+	    if (Gdx.input.isTouched()) {
+		game.setScreen(new GameScreen(game));
+		dispose();
+	    }
 	}
 
 	cg.decreaseSpawnTime(timer);
 	cg.generateCircles(Gdx.graphics.getDeltaTime());
 
-	// update stuff here
 	handler.updateCircles();
 	handler.updatePowerUps();
+
+	if (life <= 0) {
+	    handler.deleteEverything();
+	    gameover = true;
+	}
+    }
+
+    public static int getLife() {
+	return life;
+    }
+
+    public static void setLife(int l) {
+	life = l;
     }
 
     @Override

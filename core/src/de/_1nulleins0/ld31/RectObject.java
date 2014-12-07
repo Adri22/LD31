@@ -9,8 +9,8 @@ public abstract class RectObject extends GameObject {
     protected int width;
     protected int height;
 
-    public RectObject(SpriteBatch b, ShapeRenderer sr, float x, float y, ObjectID id, int width, int height) {
-	super(b, sr, x, y, id);
+    public RectObject(SpriteBatch b, ShapeRenderer sr, float x, float y, ObjectID oID, int id, int width, int height) {
+	super(b, sr, x, y, oID, id);
 	this.width = width;
 	this.height = height;
     }
@@ -19,5 +19,4 @@ public abstract class RectObject extends GameObject {
     public Rectangle getBounds() {
 	return new Rectangle(x, y, width, height);
     }
-
 }

@@ -8,19 +8,19 @@ import com.badlogic.gdx.math.MathUtils;
 
 public class Dot extends CircleObject {
 
-    private int colorR;
-    private int colorG;
-    private int colorB;
+    private float colorR;
+    private float colorG;
+    private float colorB;
     private int destinationX;
     private int destinationY;
     private int speed;
 
-    public Dot(SpriteBatch b, ShapeRenderer sr, float x, float y, ObjectID id, int r) {
-	super(b, sr, x, y, id, r);
-	colorR = MathUtils.random(0, 1);
-	colorG = MathUtils.random(0, 1);
-	colorB = MathUtils.random(0, 1);
-	speed = 100;
+    public Dot(SpriteBatch b, ShapeRenderer sr, float x, float y, ObjectID oID, int id, int r) {
+	super(b, sr, x, y, oID, id, r);
+	colorR = MathUtils.random(0.01f, 1.0f);
+	colorG = MathUtils.random(0.01f, 1.0f);
+	colorB = MathUtils.random(0.01f, 1.0f);
+	speed = 60;
 	generateDestination();
     }
 
@@ -37,11 +37,22 @@ public class Dot extends CircleObject {
 	    } else if (destinationY < y) {
 		y = y + (-1 * speed) * Gdx.graphics.getDeltaTime();
 	    }
+	} else {
+	    generateDestination();
 	}
 
-	if (x == destinationX && y == destinationY) {
+	if ((destinationX > (x - radius)) &&
+		(destinationX < (x + radius)) &&
+		(destinationY > (y - radius)) &&
+		(destinationY < (y + radius))) {
 	    delete = true;
 	}
+    }
+
+    @Override
+    public void update(float x, float y) {
+	this.x = x;
+	this.y = y;
     }
 
     @Override
@@ -68,7 +79,6 @@ public class Dot extends CircleObject {
 	int rndIndex = MathUtils.random(0, 3);
 	destinationX = destinationOptions[rndIndex][0];
 	destinationY = destinationOptions[rndIndex][1];
-	System.out.println("X: " + destinationX + " Y: " + destinationY);
     }
 
     public int getSpeed() {

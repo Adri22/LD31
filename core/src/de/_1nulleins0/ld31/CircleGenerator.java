@@ -9,7 +9,8 @@ public class CircleGenerator {
     private Handler handler;
     private SpriteBatch batch;
     private ShapeRenderer shapeRender;
-    final private int MAX_RADIUS = 30;
+    final private int MAX_RADIUS = 50;
+    private int id;
     private int rndRadius;
     private int spawnTime;
     private float deltaTimer;
@@ -18,6 +19,7 @@ public class CircleGenerator {
 	handler = h;
 	batch = b;
 	shapeRender = sr;
+	id = 1;
 	spawnTime = 5;
 	deltaTimer = 5;
     }
@@ -32,8 +34,11 @@ public class CircleGenerator {
 		    LD31Main.resolutionWidth / 2,
 		    LD31Main.resolutionHeight / 2,
 		    ObjectID.Dot,
-		    rndRadius));
+		    id,
+		    rndRadius
+		    ));
 	    deltaTimer = 0;
+	    id++;
 	}
     }
 

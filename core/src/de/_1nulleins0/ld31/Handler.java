@@ -4,10 +4,18 @@ import java.util.LinkedList;
 import com.badlogic.gdx.math.Circle;
 
 public class Handler {
-    public LinkedList<GameObject> circles = new LinkedList<GameObject>();
-    public LinkedList<GameObject> powerups = new LinkedList<GameObject>();
+    public LinkedList<GameObject> circles;
+    public LinkedList<GameObject> powerups;
     private GameObject tempObject;
-    private GameObject currentSelectedObject;
+    private boolean itemSelected;
+    private int itemSelectedID;
+
+    public Handler() {
+	circles = new LinkedList<GameObject>();
+	powerups = new LinkedList<GameObject>();
+	itemSelected = false;
+	itemSelectedID = 0;
+    }
 
     public void detectCircles(float x, float y) {
 	Circle c;
@@ -18,19 +26,14 @@ public class Handler {
 		    (x < (c.x + c.radius)) &&
 		    (y > (c.y - c.radius)) &&
 		    (y < (c.y + c.radius))) {
-		if (currentSelectedObject != null) {
-		    if (currentSelectedObject.isSelected()) {
-			currentSelectedObject.select(false);
-		    }
+		if (!itemSelected || itemSelectedID == tempObject.getID()) {
+		    tempObject.select(true, x, y);
+		    itemSelectedID = tempObject.getID();
+		    itemSelected = true;
 		}
-		tempObject.select(true, x, y);
-		currentSelectedObject = tempObject;
 	    } else {
-		// lag += Gdx.graphics.getDeltaTime();
-		// if(lag > 1){
 		tempObject.select(false);
-		// lag = 0;
-		// }
+		itemSelected = false;
 	    }
 	}
     }
@@ -39,8 +42,18 @@ public class Handler {
 	for (int i = 0; i < circles.size(); i++) {
 	    tempObject = circles.get(i);
 	    tempObject.update();
-	    if(tempObject.shouldBeDeleted()){
+	    if (tempObject.shouldBeDeleted()) {
 		removeCircle(tempObject);
+		GameScreen.setLife(GameScreen.getLife() - 10);
+	    }
+	}
+    }
+
+    public void updateSelectedCircle(float x, float y) {
+	for (int i = 0; i < circles.size(); i++) {
+	    tempObject = circles.get(i);
+	    if (itemSelectedID == tempObject.getID()) {
+		tempObject.update(x, y);
 	    }
 	}
     }
@@ -80,6 +93,19 @@ public class Handler {
 
     public void removePowerUp(GameObject object) {
 	this.powerups.remove(object);
+    }
+
+    public void deleteEverything() {
+	for (int i = 0; i < powerups.size(); i++) {
+	    tempObject = powerups.get(i);
+	    tempObject.dispose();
+	    removePowerUp(tempObject);
+	}
+	for (int i = 0; i < circles.size(); i++) {
+	    tempObject = circles.get(i);
+	    tempObject.dispose();
+	    removeCircle(tempObject);
+	}
     }
 
     public void dispose() {

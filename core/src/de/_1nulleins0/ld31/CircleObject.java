@@ -8,8 +8,8 @@ public abstract class CircleObject extends GameObject {
 
     protected int radius;
 
-    public CircleObject(SpriteBatch b, ShapeRenderer sr, float x, float y, ObjectID id, int radius) {
-	super(b, sr, x, y, id);
+    public CircleObject(SpriteBatch b, ShapeRenderer sr, float x, float y, ObjectID oID, int id, int radius) {
+	super(b, sr, x, y, oID, id);
 	this.radius = radius;
     }
 
@@ -17,5 +17,4 @@ public abstract class CircleObject extends GameObject {
     public Circle getBounds() {
 	return new Circle(x, y, radius);
     }
-
 }

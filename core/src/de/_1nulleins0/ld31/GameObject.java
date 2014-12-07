@@ -6,16 +6,18 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public abstract class GameObject {
 
     protected float x, y;
-    protected ObjectID id;
+    protected int id;
+    protected ObjectID oID;
     protected SpriteBatch batch;
     protected ShapeRenderer shapeRender;
     protected boolean selected;
     protected boolean delete;
     
-    public GameObject(SpriteBatch b, ShapeRenderer sr, float x, float y, ObjectID id) {
+    public GameObject(SpriteBatch b, ShapeRenderer sr, float x, float y, ObjectID oID, int id) {
 	this.x = x;
 	this.y = y;
 	this.id = id;
+	this.oID = oID;
 	batch = b;
 	shapeRender = sr;
 	selected = false;
@@ -23,20 +25,26 @@ public abstract class GameObject {
     }
 
     public abstract void update();
+    
+    public abstract void update(float x, float y);
 
     public abstract void render();
 
     public void setX(float x) {
 	this.x = x;
-    };
+    }
 
     public void setY(float y) {
 	this.y = y;
-    };
+    }
 
-    public ObjectID getID() {
+    public int getID(){
 	return id;
-    };
+    }
+    
+    public ObjectID getObjectID() {
+	return oID;
+    }
 
     public void select(boolean s) {
 	selected = s;
