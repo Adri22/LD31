@@ -7,17 +7,15 @@ public abstract class GameObject {
 
     protected float x, y;
     protected int id;
-    protected ObjectID oID;
     protected SpriteBatch batch;
     protected ShapeRenderer shapeRender;
     protected boolean selected;
     protected boolean delete;
     
-    public GameObject(SpriteBatch b, ShapeRenderer sr, float x, float y, ObjectID oID, int id) {
+    public GameObject(SpriteBatch b, ShapeRenderer sr, float x, float y, int id) {
 	this.x = x;
 	this.y = y;
 	this.id = id;
-	this.oID = oID;
 	batch = b;
 	shapeRender = sr;
 	selected = false;
@@ -40,10 +38,6 @@ public abstract class GameObject {
 
     public int getID(){
 	return id;
-    }
-    
-    public ObjectID getObjectID() {
-	return oID;
     }
 
     public void select(boolean s) {

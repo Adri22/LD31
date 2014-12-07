@@ -36,11 +36,13 @@ public class InputHandler implements InputProcessor {
 	clickPos.set(x, y, 0);
 	camera.unproject(clickPos);
 	handler.detectCircles(clickPos.x, clickPos.y);
+	handler.detectPowerUps(clickPos.x, clickPos.y);
 	return false;
     }
 
     @Override
     public boolean touchUp(int x, int y, int pointer, int button) {
+	handler.resetSelection();
 	return false;
     }
 

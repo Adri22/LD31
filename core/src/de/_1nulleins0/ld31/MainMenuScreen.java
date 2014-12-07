@@ -31,7 +31,10 @@ public class MainMenuScreen implements Screen {
 
 	game.batch.draw(menuLogo, (game.resolutionWidth - menuLogo.getWidth()) / 2, game.resolutionHeight - menuLogo.getHeight());
 	
-	// write playing-instructions and stuff like that here
+	game.font.draw(game.batch, "Don't let your dots move out of the screen!", 300, 270);
+	game.font.draw(game.batch, "Keep them inside by clicking on it and drag them back to the middle.", 300, 250);
+	game.font.draw(game.batch, "Or click a bomb to destroy some dots.", 300, 230);
+	game.font.draw(game.batch, "How long can you survive?", 300, 210);
 	game.font.draw(game.batch, "Click anywhere to begin!", 420, 100);
 
 	game.batch.end();

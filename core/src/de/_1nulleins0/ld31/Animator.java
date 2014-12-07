@@ -51,12 +51,6 @@ public class Animator {
 	animation.setFrameDuration(speed);
     }
 
-    public void setFlipping(boolean x, boolean y) {
-	if (currentFrame != null) {
-	    currentFrame.flip(x, y);
-	}
-    }
-
     public int getRows() {
 	return rows;
     }

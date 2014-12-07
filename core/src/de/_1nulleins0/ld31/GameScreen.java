@@ -2,6 +2,7 @@ package de._1nulleins0.ld31;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
@@ -11,7 +12,8 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
     private Handler handler;
     private InputHandler input;
-    private CircleGenerator cg;
+    private SoundHandler sound;
+    private ItemGenerator ig;
     private float timer;
     private static int life;
     private static boolean gameover;
@@ -20,10 +22,11 @@ public class GameScreen implements Screen {
 	game = g;
 	camera = new OrthographicCamera();
 	camera.setToOrtho(false, game.resolutionWidth, game.resolutionHeight);
-	handler = new Handler();
+	sound = new SoundHandler();
+	handler = new Handler(sound);
 	input = new InputHandler(camera, handler);
 	Gdx.input.setInputProcessor(input);
-	cg = new CircleGenerator(handler, game.batch, game.shapeRender);
+	ig = new ItemGenerator(handler, game.batch, game.shapeRender);
 	timer = 0;
 	life = 1000;
 	gameover = false;
@@ -34,8 +37,6 @@ public class GameScreen implements Screen {
 	Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 	camera.update();
-
-	handler.renderCircles();
 
 	game.batch.setProjectionMatrix(camera.combined);
 	game.batch.begin();
@@ -67,30 +68,35 @@ public class GameScreen implements Screen {
 		    game.resolutionHeight - 300);
 	    game.font.draw(
 		    game.batch,
-		    "Click anywhere to start a new turn!",
+		    "Press Enter to start a new turn!",
 		    390,
 		    game.resolutionHeight - 350);
 	}
 
 	game.batch.end();
+	
+	handler.renderCircles();
+	handler.renderExplosions();
     }
 
     private void updateGame() {
 	if (!gameover) {
 	    timer += Gdx.graphics.getDeltaTime();
 	} else {
-	    if (Gdx.input.isTouched()) {
+	    if (Gdx.input.isKeyPressed(Keys.ENTER)) {
 		game.setScreen(new GameScreen(game));
 		dispose();
 	    }
 	}
 
-	cg.decreaseSpawnTime(timer);
-	cg.generateCircles(Gdx.graphics.getDeltaTime());
-
+	ig.decreaseCircleSpawnTime(timer);
+	ig.generateCircles(Gdx.graphics.getDeltaTime());
+	ig.generatePowerUps(Gdx.graphics.getDeltaTime());
+	
 	handler.updateCircles();
 	handler.updatePowerUps();
-
+	handler.updateExplosions();
+	
 	if (life <= 0) {
 	    handler.deleteEverything();
 	    gameover = true;
@@ -134,5 +140,6 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
 	handler.dispose();
+	sound.dispose();
     }
 }

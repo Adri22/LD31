@@ -15,8 +15,8 @@ public class Dot extends CircleObject {
     private int destinationY;
     private int speed;
 
-    public Dot(SpriteBatch b, ShapeRenderer sr, float x, float y, ObjectID oID, int id, int r) {
-	super(b, sr, x, y, oID, id, r);
+    public Dot(SpriteBatch b, ShapeRenderer sr, float x, float y, int id, int r) {
+	super(b, sr, x, y, id, r);
 	colorR = MathUtils.random(0.01f, 1.0f);
 	colorG = MathUtils.random(0.01f, 1.0f);
 	colorB = MathUtils.random(0.01f, 1.0f);

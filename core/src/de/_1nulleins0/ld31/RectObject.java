@@ -9,8 +9,8 @@ public abstract class RectObject extends GameObject {
     protected int width;
     protected int height;
 
-    public RectObject(SpriteBatch b, ShapeRenderer sr, float x, float y, ObjectID oID, int id, int width, int height) {
-	super(b, sr, x, y, oID, id);
+    public RectObject(SpriteBatch b, ShapeRenderer sr, float x, float y, int id, int width, int height) {
+	super(b, sr, x, y, id);
 	this.width = width;
 	this.height = height;
     }
