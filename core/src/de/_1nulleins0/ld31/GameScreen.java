@@ -60,8 +60,7 @@ public class GameScreen implements Screen {
 	if (Gdx.input.isTouched()) {
 	    touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 	    camera.unproject(touchPos);
-
-	    // player.setPos(new Point((int) touchPos.x, (int) touchPos.y));
+	    handler.detectCircles(touchPos.x, touchPos.y);
 	}
 
 	cg.decreaseSpawnTime(timer);

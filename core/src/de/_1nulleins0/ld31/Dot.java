@@ -26,21 +26,32 @@ public class Dot extends CircleObject {
 
     @Override
     public void update() {
-	if (destinationX > x) {
-	    x = x + speed * Gdx.graphics.getDeltaTime();
-	} else if (destinationX < x) {
-	    x = x + (-1 * speed) * Gdx.graphics.getDeltaTime();
+	if (!isSelected()) {
+	    if (destinationX > x) {
+		x = x + speed * Gdx.graphics.getDeltaTime();
+	    } else if (destinationX < x) {
+		x = x + (-1 * speed) * Gdx.graphics.getDeltaTime();
+	    }
+	    if (destinationY > y) {
+		y = y + speed * Gdx.graphics.getDeltaTime();
+	    } else if (destinationY < y) {
+		y = y + (-1 * speed) * Gdx.graphics.getDeltaTime();
+	    }
 	}
-	// MathUtils.sin(radians)
-	if (destinationY > y) {
-	    y = y + speed * Gdx.graphics.getDeltaTime();
-	} else if (destinationY < y) {
-	    y = y + (-1 * speed) * Gdx.graphics.getDeltaTime();
+
+	if (x == destinationX && y == destinationY) {
+	    delete = true;
 	}
     }
 
     @Override
     public void render() {
+	if (selected) {
+	    shapeRender.begin(ShapeType.Line);
+	    shapeRender.setColor(1, 1, 1, 0);
+	    shapeRender.circle(x, y, radius + 3);
+	    shapeRender.end();
+	}
 	shapeRender.begin(ShapeType.Filled);
 	shapeRender.setColor(colorR, colorG, colorB, 0);
 	shapeRender.circle(x, y, radius);

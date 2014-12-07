@@ -15,6 +15,7 @@ public abstract class RectObject extends GameObject {
 	this.height = height;
     }
 
+    @Override
     public Rectangle getBounds() {
 	return new Rectangle(x, y, width, height);
     }

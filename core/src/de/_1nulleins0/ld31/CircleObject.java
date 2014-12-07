@@ -13,6 +13,7 @@ public abstract class CircleObject extends GameObject {
 	this.radius = radius;
     }
 
+    @Override
     public Circle getBounds() {
 	return new Circle(x, y, radius);
     }

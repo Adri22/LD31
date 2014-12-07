@@ -4,16 +4,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 
 public class MainMenuScreen implements Screen {
 
     private LD31Main game;
     private OrthographicCamera camera;
-
+    private Texture menuLogo;
+    
     public MainMenuScreen(LD31Main g) {
 	game = g;
 	camera = new OrthographicCamera();
 	camera.setToOrtho(false, game.resolutionWidth, game.resolutionHeight);
+	menuLogo = new Texture("graphics/dotkeeper.png");
     }
 
     @Override
@@ -26,8 +29,8 @@ public class MainMenuScreen implements Screen {
 	game.batch.setProjectionMatrix(camera.combined);
 	game.batch.begin();
 
-	// draw logo here
-
+	game.batch.draw(menuLogo, (game.resolutionWidth - menuLogo.getWidth()) / 2, game.resolutionHeight - menuLogo.getHeight());
+	
 	// write playing-instructions and stuff like that here
 	game.font.draw(game.batch, "Click anywhere to begin!", 420, 100);
 
@@ -61,6 +64,6 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-	// dispose logo-texture here
+	menuLogo.dispose();
     }
 }
