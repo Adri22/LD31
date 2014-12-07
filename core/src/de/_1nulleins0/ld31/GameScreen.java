@@ -74,7 +74,7 @@ public class GameScreen implements Screen {
 	}
 
 	game.batch.end();
-	
+
 	handler.renderCircles();
 	handler.renderExplosions();
     }
@@ -92,11 +92,11 @@ public class GameScreen implements Screen {
 	ig.decreaseCircleSpawnTime(timer);
 	ig.generateCircles(Gdx.graphics.getDeltaTime());
 	ig.generatePowerUps(Gdx.graphics.getDeltaTime());
-	
+
 	handler.updateCircles();
 	handler.updatePowerUps();
 	handler.updateExplosions();
-	
+
 	if (life <= 0) {
 	    handler.deleteEverything();
 	    gameover = true;

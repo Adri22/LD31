@@ -11,7 +11,7 @@ public class MainMenuScreen implements Screen {
     private LD31Main game;
     private OrthographicCamera camera;
     private Texture menuLogo;
-    
+
     public MainMenuScreen(LD31Main g) {
 	game = g;
 	camera = new OrthographicCamera();
@@ -30,12 +30,13 @@ public class MainMenuScreen implements Screen {
 	game.batch.begin();
 
 	game.batch.draw(menuLogo, (game.resolutionWidth - menuLogo.getWidth()) / 2, game.resolutionHeight - menuLogo.getHeight());
-	
+
 	game.font.draw(game.batch, "Don't let your dots move out of the screen!", 300, 270);
 	game.font.draw(game.batch, "Keep them inside by clicking on it and drag them back to the middle.", 300, 250);
 	game.font.draw(game.batch, "Or click a bomb to destroy some dots.", 300, 230);
 	game.font.draw(game.batch, "How long can you survive?", 300, 210);
 	game.font.draw(game.batch, "Click anywhere to begin!", 420, 100);
+	game.font.draw(game.batch, "v." + game.version, 5, 15);
 
 	game.batch.end();
 

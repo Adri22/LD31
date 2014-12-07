@@ -9,6 +9,7 @@ public class LD31Main extends Game {
 
     public static int resolutionWidth = 1024;
     public static int resolutionHeight = 768;
+    public static float version = 1.0f;
     public SpriteBatch batch;
     public ShapeRenderer shapeRender;
     public BitmapFont font;

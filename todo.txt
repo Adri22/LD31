@@ -1,5 +1,0 @@
-
-
-initialize a libgdx project here
-
-HTML5 / Java Desktop

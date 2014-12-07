@@ -11,7 +11,7 @@ public abstract class GameObject {
     protected ShapeRenderer shapeRender;
     protected boolean selected;
     protected boolean delete;
-    
+
     public GameObject(SpriteBatch b, ShapeRenderer sr, float x, float y, int id) {
 	this.x = x;
 	this.y = y;
@@ -23,7 +23,7 @@ public abstract class GameObject {
     }
 
     public abstract void update();
-    
+
     public abstract void update(float x, float y);
 
     public abstract void render();
@@ -36,25 +36,25 @@ public abstract class GameObject {
 	this.y = y;
     }
 
-    public int getID(){
+    public int getID() {
 	return id;
     }
 
     public void select(boolean s) {
 	selected = s;
     }
-    
+
     public void select(boolean s, float selectPosX, float selectPosY) {
 	selected = s;
 	x = selectPosX;
 	y = selectPosY;
     }
-    
-    public boolean isSelected(){
+
+    public boolean isSelected() {
 	return selected;
     }
-    
-    public boolean shouldBeDeleted(){
+
+    public boolean shouldBeDeleted() {
 	return delete;
     }
 

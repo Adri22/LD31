@@ -1,11 +1,10 @@
 package de._1nulleins0.ld31;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
-public class Explosion extends CircleObject{
+public class Explosion extends CircleObject {
 
     public Explosion(SpriteBatch b, ShapeRenderer sr, float x, float y, int id, int radius) {
 	super(b, sr, x, y, id, radius);
@@ -13,7 +12,7 @@ public class Explosion extends CircleObject{
 
     @Override
     public void update() {
-	if(radius != 200){
+	if (radius != 200) {
 	    radius++;
 	} else {
 	    delete = true;

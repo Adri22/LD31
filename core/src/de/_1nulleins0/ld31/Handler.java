@@ -1,7 +1,6 @@
 package de._1nulleins0.ld31;
 
 import java.util.LinkedList;
-
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 

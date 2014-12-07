@@ -26,8 +26,8 @@ public class SoundHandler {
     public void destroyDot() {
 	destroyDotSound.play();
     }
-    
-    public void dispose(){
+
+    public void dispose() {
 	explosionSound.dispose();
 	loseLifeSound.dispose();
 	destroyDotSound.dispose();

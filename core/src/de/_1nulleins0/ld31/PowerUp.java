@@ -9,7 +9,7 @@ public class PowerUp extends RectObject {
     private Texture powerupTex;
     private Animator powerupAnimation;
     private Handler handler;
-    
+
     public PowerUp(SpriteBatch b, ShapeRenderer sr, float x, float y, int id, int width, int height, Handler handler) {
 	super(b, sr, x, y, id, width, height);
 	this.handler = handler;
@@ -19,7 +19,7 @@ public class PowerUp extends RectObject {
 
     @Override
     public void update() {
-	if(selected){
+	if (selected) {
 	    handler.addExplosion(new Explosion(
 		    batch,
 		    shapeRender,
