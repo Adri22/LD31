@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Handler {
+
     private SoundHandler sound;
     public LinkedList<GameObject> circles;
     public LinkedList<GameObject> powerups;
